@@ -1,0 +1,14 @@
+{
+  "name": "PROJECT-LIVEHUD-API",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/MsMisael/PROJECT-LIVEHUD-API.git",
+  "author": "Misael Silva de Souza <msmisael@outlook.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "ts-node-dev": "^2.0.0"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
