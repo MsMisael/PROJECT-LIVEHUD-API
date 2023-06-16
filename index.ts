@@ -1,4 +1,5 @@
+import * as dotenv from 'dotenv'
 
-const a: number = 2
+dotenv.config()
 
-console.log(a)
+import './src'
