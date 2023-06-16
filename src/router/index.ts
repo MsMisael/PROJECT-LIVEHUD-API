@@ -1,11 +1,9 @@
-import {Router} from 'express'
+import express from 'express'
 
-const appRouter = Router() 
+const appRouter = express.Router()
 
-appRouter.get('/',(req,res)=>{
-    console.log('foi')
-    res.json({})
-})
-
+appRouter.get('/login', (req, res) => {
+    res.render('login',{teste:1})
+ })
 
 export default appRouter    
