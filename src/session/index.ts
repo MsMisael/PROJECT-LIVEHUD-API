@@ -11,7 +11,7 @@ export default function configSession(server: Express,) {
             client: redis,
             prefix: "sessions:",
         }),
-        secret: 'keyboard cat',
+        secret: String(process.env.APP_SECRET),
         resave: true,
         saveUninitialized: true,
         cookie: { secure: false, maxAge: 2 * 60 * 60 * 1000 }

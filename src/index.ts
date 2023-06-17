@@ -7,7 +7,7 @@ import './redis'
 
 const server = express()
 
-server.set('trust proxy', 1)
+
  
 configHandlebars(server)
 configSession(server)
