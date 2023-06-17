@@ -1,9 +1,10 @@
-import redis from './redis'
 import express from 'express'
-import appRouter from './router'
-import { engine } from 'express-handlebars';
 import session from 'express-session'
 import RedisStore from "connect-redis"
+import { engine } from 'express-handlebars';
+
+import redis from './redis'
+import appRouter from './router'
 
 const server = express()
 

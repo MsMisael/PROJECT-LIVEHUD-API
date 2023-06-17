@@ -1,6 +1,4 @@
 import express from 'express'
-import jwt from'jsonwebtoken'
-import TwitchApiAdapter from '../twitch'
 
 const appRouter = express.Router()
 
