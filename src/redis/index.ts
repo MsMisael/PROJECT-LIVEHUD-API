@@ -18,5 +18,6 @@ async function start(){
 
 }
 
-export default start()
+start()
+export default client
 
