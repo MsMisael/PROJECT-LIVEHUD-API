@@ -1,18 +1,16 @@
 import express from 'express'
 import session from 'express-session'
-import RedisStore from "connect-redis"
-import { engine } from 'express-handlebars';
+import RedisStore from "connect-redis" 
 
 import redis from './redis'
 import appRouter from './router'
+import configHandlebars from './handlebars'
 
 const server = express()
 
 server.set('trust proxy', 1)
-
-server.engine('handlebars', engine());
-server.set('view engine', 'handlebars');
-server.set('views', './src/views');
+ 
+configHandlebars(server)
 
 server.use(
     session({
@@ -22,9 +20,9 @@ server.use(
             prefix: "sessions:",
         }),
         secret: 'keyboard cat',
-        resave: false,
+        resave: true,
         saveUninitialized: true,
-        cookie: { secure: false }
+        cookie: { secure: false,maxAge: 2*60*60*1000 }
     })
 )
 
