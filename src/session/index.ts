@@ -9,8 +9,8 @@ export default function configSession(server: Express,) {
         // @ts-ignore
         store: new RedisStore({
             client: redis,
-            prefix: "sessions:",
-        }),
+            prefix: "session:",
+        }), 
         secret: String(process.env.APP_SECRET),
         resave: true,
         saveUninitialized: true,
