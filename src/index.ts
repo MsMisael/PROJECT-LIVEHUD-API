@@ -3,12 +3,11 @@ import appRouter from './router'
 import configHandlebars from './handlebars'
 import configSession from './session'
 
+import './mongoose'
 import './redis'
 
 const server = express()
 
-
- 
 configHandlebars(server)
 configSession(server)
 

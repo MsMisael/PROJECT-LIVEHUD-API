@@ -1,13 +1,15 @@
 import express from 'express'
-import auth from '../controllers/auth'
+import auth from '../controllers/auth' 
 
 const appRouter = express.Router()
 
 appRouter.get('/login', auth.login)
 appRouter.get('/callback', auth.callback)
 appRouter.use(auth.middleware)
+ 
 
-appRouter.get('/', (req, res) => { 
+appRouter.get('/', (req, res) => {
+    console.log(req.session.claims)
     res.render('profile', { name: req.session.user?.display_name, email: req.session.user?.email, profile_pic: req.session.user?.profile_image_url })
 })
 

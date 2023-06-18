@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
 import TwitchApiAdapter from '../twitch'
+import User from '../models/userData'
 
 
 const login = (req: Request, res: Response) => {
@@ -8,7 +9,16 @@ const login = (req: Request, res: Response) => {
 
 const callback = async (req: Request, res: Response) => {
     const { data } = await TwitchApiAdapter.getToken(String(req.query.code))
-    const { data: { data: user } } = await TwitchApiAdapter.getUserFromToken(String(data.access_token))
+    const { data: { data: user } } = await TwitchApiAdapter.getUserFromToken(String(data.access_token))  
+
+    let userData = await User.findOne({ id: user[1].id })
+
+    console.log(userData)
+    if (!userData) {
+        userData = await User.create({ id: user[1].id, hasStreamUpListener: false })
+
+    }
+    req.session.claims = userData
     req.session.user = user[0]
     req.session.auth = data
     res.redirect('./')
