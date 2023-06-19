@@ -1,6 +1,6 @@
 import { Express } from 'express'
 import session from 'express-session'
-import RedisStore from "connect-redis" 
+import RedisStore from "connect-redis"
 import redis from '../redis'
 
 export default function configSession(server: Express,) {
@@ -10,10 +10,10 @@ export default function configSession(server: Express,) {
         store: new RedisStore({
             client: redis,
             prefix: "session:",
-        }), 
+        }),
         secret: String(process.env.APP_SECRET),
         resave: true,
         saveUninitialized: true,
-        cookie: { secure: false, maxAge: 2 * 60 * 60 * 1000 }
+        cookie: { secure: true, maxAge: 2 * 60 * 60 * 1000, sameSite: 'none' }
     }))
 }
