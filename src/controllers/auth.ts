@@ -6,10 +6,16 @@ import User from '../models/userData'
 const login = (req: Request, res: Response) => {
     res.render('login', { title: 'Login', scopes: 'user:read:email', state: 'estado' })
 }
+const logout = (req: Request, res: Response) => {
+    req.session.destroy(() => {
+
+    })
+    res.redirect('/login')
+}
 
 const callback = async (req: Request, res: Response) => {
     const { data } = await TwitchApiAdapter.getToken(String(req.query.code))
-    const { data: { data: user } } = await TwitchApiAdapter.getUserFromToken(String(data.access_token))  
+    const { data: { data: user } } = await TwitchApiAdapter.getUserFromToken(String(data.access_token))
 
     let userData = await User.findOne({ id: user[0].id })
 
@@ -21,7 +27,7 @@ const callback = async (req: Request, res: Response) => {
     req.session.claims = userData
     req.session.user = user[0]
     req.session.auth = data
-    res.redirect('./')
+    res.redirect('http://localhost:5173')
 }
 
 const middleware = (req: Request, res: Response, next: NextFunction) => {
@@ -30,11 +36,11 @@ const middleware = (req: Request, res: Response, next: NextFunction) => {
 
         next()
     } else {
-        res.redirect('./login')
+        res.status(401).send()
     }
 }
 
 
 
 
-export default { login, callback, middleware }
+export default { login, logout, callback, middleware }
