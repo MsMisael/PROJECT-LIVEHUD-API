@@ -3,14 +3,11 @@ import TwitchApiAdapter from '../twitch'
 import User from '../models/userData'
 
 
-const login = (req: Request, res: Response) => {
-    res.render('login', { title: 'Login', scopes: 'user:read:email', state: 'estado' })
-}
 const logout = (req: Request, res: Response) => {
     req.session.destroy(() => {
 
     })
-    res.redirect('/login')
+    res.redirect(String(process.env.WEB_CLIENT_URL))
 }
 
 const callback = async (req: Request, res: Response) => {
@@ -19,7 +16,6 @@ const callback = async (req: Request, res: Response) => {
 
     let userData = await User.findOne({ id: user[0].id })
 
-    console.log(userData)
     if (!userData) {
         userData = await User.create({ id: user[0].id, hasStreamUpListener: false })
 
@@ -27,7 +23,7 @@ const callback = async (req: Request, res: Response) => {
     req.session.claims = userData
     req.session.user = user[0]
     req.session.auth = data
-    res.redirect('http://localhost:5173')
+    res.redirect(String(process.env.WEB_CLIENT_URL))
 }
 
 const middleware = (req: Request, res: Response, next: NextFunction) => {
@@ -43,4 +39,4 @@ const middleware = (req: Request, res: Response, next: NextFunction) => {
 
 
 
-export default { login, logout, callback, middleware }
+export default {  logout, callback, middleware }

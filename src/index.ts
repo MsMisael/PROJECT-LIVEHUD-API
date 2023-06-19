@@ -1,6 +1,5 @@
 import express from 'express'
 import appRouter from './router'
-import configHandlebars from './handlebars'
 import configSession from './session'
 import configureCors from './cors'
 
@@ -9,7 +8,6 @@ import './redis'
 
 const server = express()
 
-configHandlebars(server)
 configSession(server)
 configureCors(server)
 server.use(appRouter)
