@@ -10,6 +10,9 @@ const server = express()
 
 configSession(server)
 configureCors(server)
+
+server.use(express.json())
+
 server.use(appRouter)
 
 
