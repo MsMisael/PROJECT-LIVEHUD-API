@@ -5,6 +5,7 @@ import grid from '../controllers/grid'
 
 const appRouter = express.Router()
 
+appRouter.get('/login', auth.login)
 appRouter.get('/logout', auth.logout)
 appRouter.get('/callback', auth.callback)
 

@@ -36,7 +36,11 @@ const middleware = (req: Request, res: Response, next: NextFunction) => {
     }
 }
 
+const login = (req: Request, res: Response) => {
+
+    res.redirect(`https://id.twitch.tv/oauth2/authorize?response_type=code&client_id=${process.env.TWITCH_CLIENT_ID}&redirect_uri=${process.env.WEB_SERVICE_URL}/callback&scope=${'user:read:email'}`)
+}
 
 
 
-export default {  logout, callback, middleware }
+export default { login, logout, callback, middleware }
